@@ -1,0 +1,78 @@
+# -----------------------------
+#  Core
+# -----------------------------
+.DS_Store
+*.log
+*.tmp
+*.swp
+*.swo
+*.bak
+*.env
+.env.*
+!.env.example
+
+
+.vscode/
+.idea/
+*.code-workspace
+
+# -----------------------------
+#  Node / Next.js (frontend)
+# -----------------------------
+node_modules/
+.next/
+out/
+dist/
+build/
+coverage/
+.cache/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+
+public/*.zip
+public/uploads/
+
+# -----------------------------
+#  Python / FastAPI (backend)
+# ---------------s--------------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pdb
+*.so
+*.egg-info/
+.eggs/
+venv/
+env/
+ENV/
+.venv/
+instance/
+*.db
+*.sqlite3
+
+
+uvicorn.log
+*.pid
+
+
+# -----------------------------
+#  pnpm / monorepo
+# -----------------------------
+pnpm-lock.yaml
+
+!pnpm-workspace.yaml
+
+
+packages/*/dist/
+packages/*/build/
+
+# -----------------------------
+#  Misc
+# -----------------------------
+*.tgz
+*.tar.gz
+*.zip

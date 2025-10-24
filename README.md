@@ -1,2 +1,9 @@
-# MovieRec
-Web Dev Final Project
+## Frontend
+
+cd apps/web
+
+## Backend
+
+cd apps/api
+
+# Please follow the READMEs in the respective parts of the monorepo
