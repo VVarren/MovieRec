@@ -1,0 +1,15 @@
+# Ignore backend folder
+/apps/api/
+
+# Ignore Python virtual environment
+.venv/
+
+# Ignore environment variable files
+*.env
+
+# Node modules
+node_modules/
+
+# Next.js build outputs
+.next/
+out/

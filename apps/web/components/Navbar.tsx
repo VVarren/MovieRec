@@ -1,39 +1,35 @@
-import Link from "next/link";
-import React from "react";
+"use client";
 
-const Navbar = () => {
-    return (
-        <nav className="bg-gray-800 text-white p-4 flex justify-between items-center">
-            <div className="text-xl font-bold">MovieRec</div>
-            <ul className="flex space-x-6">
-                <li>
-                    <Link href="/auth">
-                        Sign In / Sign Up
-                    </Link>
-                </li>
-                <li>
-                    <Link href="/profile">
-                        Profile
-                    </Link>
-                </li>
-                <li>
-                    <Link href="/movies">
-                        Movies
-                    </Link>
-                </li>
-                <li>
-                    <Link href="/reviews">
-                        Reviews
-                    </Link>
-                </li>
-                <li>
-                    <Link href="/books">
-                        Books
-                    </Link>
-                </li>
-            </ul>
-        </nav>
-    );
+import React from "react";
+import Link from "next/link";
+
+const Navbar: React.FC = () => {
+  const links = [
+    { name: "Sign In / Sign Up", href: "/auth" },
+    { name: "Profile", href: "/profile" },
+    { name: "Movies Page", href: "/movies" },
+    { name: "Review Page", href: "/reviews" },
+    { name: "Books Page", href: "/books" },
+  ];
+
+  return (
+    <nav className="fixed top-0 left-0 h-full w-64 bg-[#000033] shadow-lg flex flex-col p-6">
+      <h1 className="text-2xl font-bold mb-8 text-white">MovieRec</h1>
+      <ul className="flex flex-col gap-4">
+        {links.map((link) => (
+          <li key={link.href}>
+            <Link
+              href={link.href}
+              className="block py-2 px-4 rounded hover:bg-[#000055] transition text-white"
+            >
+              {link.name}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
 };
 
 export default Navbar;
+
