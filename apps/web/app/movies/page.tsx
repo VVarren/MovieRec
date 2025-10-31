@@ -1,20 +1,39 @@
-import React from 'react';
+"use client"
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { getMovies } from '../../lib/fetcher';
 
-const movies = [
-  {
-    id: 'arcane',
-    title: 'Arcane Season 2',
-    year: 2025,
-    image: '/images/arcane.jpg',
-    rating: 4.7,
-    director: 'Riot',
-  },
-];
 
 const MoviesPage: React.FC = () => {
+   const [movies, setMovies] = useState([
+    {
+      id: "arcane",
+      title: "Arcane Season 2",
+      year: 2025,
+      image: "/images/arcane.jpg",
+      rating: 4.7,
+      director: "Riot",
+    },
+  ]);
+  useEffect(() => {
+    async function loadMovies() {
+      try {
+        const fetchedMovies = await getMovies();
+        console.log(fetchedMovies);
+        //console.log(fetchedMovies[0]);
+        setMovies((prev) => [...prev, ...fetchedMovies]);
+      } catch (error) {
+        console.error("Failed to load movies:", error);
+      }
+    }
+
+    loadMovies();
+  }, []); 
+  console.log(getMovies());
+
   return (
+    
     <div className="flex min-h-screen bg-[#242730] flex-col bg-zinc-50 font-sans dark:bg-black">
       <main className="flex flex-col items-center justify-center p-8 w-full bg-[#242730]">
         <h1 className="text-4xl font-bold text-black dark:text-white mb-6">Movies & Shows</h1>
@@ -31,7 +50,7 @@ const MoviesPage: React.FC = () => {
             >
               <div className="relative w-full aspect-[3/4]">
                 <Image
-                  src={movie.image}
+                  src={movie.image || "/images/arcane.jpg"}
                   alt={movie.title}
                   fill
                   className="object-cover"
