@@ -79,18 +79,133 @@
 //   );
 // }
 
-async function getData() {
-  // Mocked data instead of fetching from backend
-  return {
-    message: "Hello from frontend mock!"
-  };
-}
 
-export default async function Home() {
-  const data = await getData();
+'use client';
+
+import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+
+const movies = [
+  { id: 'batman', title: 'The Batman', year: 2022, image: '/images/posters/batman.jpg' },
+  { id: 'spiderman', title: 'Spider-Man Homecoming', year: 2017, image: '/images/posters/spiderman.jpg' },
+  { id: 'aquaman', title: 'Aquaman and the Lost Kingdom', year: 2023, image: '/images/posters/aquaman.jpg' },
+];
+
+const HomePage: React.FC = () => {
   return (
-    <div>
-      <h1>{data.message}</h1>
+    <div className="min-h-screen bg-[#242730] text-white px-10 py-8 font-sans">
+      {/* Header */}
+      <header className="mb-8">
+        <h1 className="text-5xl font-extrabold tracking-tight">
+          Hello, <span className="text-[#58b8ff]">Guest!</span>
+        </h1>
+        <p className="text-zinc-400 mt-2 text-lg">
+          Review and get recommendations for what you like...
+        </p>
+      </header>
+
+      {/* Grid Layout */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+        {/* Left Section */}
+        <div>
+          <Section title="Popular Films/Shows This Month" />
+          <Section title="Popular Books This Month" />
+        </div>
+
+        {/* Middle Section */}
+        <div className="border-x border-gray-600 px-6">
+          <CarouselSection title="Have you already watched these?" items={movies} />
+          <CarouselSection
+            title="Because you liked Superman..."
+            highlight="Superman"
+            items={movies}
+          />
+        </div>
+
+        {/* Right Section */}
+        <div>
+          <Section title="Our Weekly Recommendations" />
+        </div>
+      </div>
     </div>
   );
-}
+};
+
+export default HomePage;
+
+type CarouselItem = {
+  id: string;
+  title: string;
+  year: number;
+  image: string;
+};
+
+const CarouselSection: React.FC<{
+  title: string;
+  items: CarouselItem[];
+  highlight?: string;
+}> = ({ title, items, highlight }) => {
+  return (
+    <section className="mb-10">
+      <h2 className="text-xl font-bold mb-3">
+        {title.split(highlight || '').map((part, i, arr) =>
+          i < arr.length - 1 ? (
+            <React.Fragment key={i}>
+              {part}
+              <span className="text-[#58b8ff]">{highlight}</span>
+            </React.Fragment>
+          ) : (
+            part
+          )
+        )}
+      </h2>
+
+      <div className="relative">
+        {/* Scrollable row */}
+        <div className="flex overflow-x-auto gap-4 pb-2 scrollbar-hide">
+          {items.map((movie) => (
+            <Link
+              key={movie.id}
+              href={`/movies/${movie.id}`}
+              className="flex-none w-40 hover:scale-105 transition-transform"
+            >
+              <div className="relative w-40 h-56 rounded-lg overflow-hidden bg-gray-700">
+                <Image
+                  src={movie.image}
+                  alt={movie.title}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <p className="text-sm font-semibold mt-2 leading-tight">
+                {movie.title}
+              </p>
+              <p className="text-xs text-gray-400">{movie.year}</p>
+            </Link>
+          ))}
+        </div>
+
+        {/* Right gradient fade */}
+        <div className="absolute top-0 right-0 h-full w-16 bg-gradient-to-l from-[#242730] to-transparent pointer-events-none" />
+      </div>
+    </section>
+  );
+};
+
+
+const Section: React.FC<{ title: string }> = ({ title }) => {
+  return (
+    <section className="mb-10">
+      <h2 className="text-xl font-bold mb-3">{title}</h2>
+      <div className="flex overflow-x-auto gap-4 pb-2 scrollbar-hide">
+        {[...Array(4)].map((_, i) => (
+          <div
+            key={i}
+            className="flex-none w-40 h-56 bg-gray-400 rounded-lg opacity-40"
+          ></div>
+        ))}
+      </div>
+    </section>
+  );
+};

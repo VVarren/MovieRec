@@ -5,6 +5,7 @@ import Link from "next/link";
 
 const Navbar: React.FC = () => {
   const links = [
+    { name: "Home", href: "/" },
     { name: "Sign In / Sign Up", href: "/auth" },
     { name: "Profile", href: "/profile" },
     { name: "Movies Page", href: "/movies" },
