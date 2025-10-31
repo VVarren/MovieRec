@@ -76,3 +76,5 @@ packages/*/build/
 *.tgz
 *.tar.gz
 *.zip
+
+apps/api/main.py
