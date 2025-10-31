@@ -87,9 +87,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 const movies = [
-  { id: 'batman', title: 'The Batman', year: 2022, image: '/images/posters/batman.jpg' },
-  { id: 'spiderman', title: 'Spider-Man Homecoming', year: 2017, image: '/images/posters/spiderman.jpg' },
-  { id: 'aquaman', title: 'Aquaman and the Lost Kingdom', year: 2023, image: '/images/posters/aquaman.jpg' },
+  { id: 'batman', title: 'The Batman', year: 2022, image: '/images/thebatman.jpg' },
+  { id: 'spiderman', title: 'Spider-Man Homecoming', year: 2017, image: '/images/spiderman_homecoming.jpg' },
+  { id: 'aquaman', title: 'Aquaman and the Lost Kingdom', year: 2023, image: '/images/aquaman_lost_kingdom.jpg' },
 ];
 
 const HomePage: React.FC = () => {
